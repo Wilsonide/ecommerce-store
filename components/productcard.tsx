@@ -1,0 +1,80 @@
+"use client"
+import { Product } from '@/types'
+import React, { MouseEventHandler } from 'react'
+import Image from 'next/image'
+import { Expand, ShoppingCart } from 'lucide-react'
+import IconButton from './ui/iconButton'
+import Currency from './ui/currency'
+import { useRouter } from 'next/navigation'
+import usePreviewModal from '@/hooks/usePreview-modal'
+import useCart from '@/hooks/useCart'
+import { Rating } from '@mui/material'
+import { truncate } from '@/lib/utils'
+
+interface ComponentProp{
+    data: Product
+}
+
+function ProductCard({data}:ComponentProp) {
+    const previewModal = usePreviewModal()
+    const cart = useCart()
+    const router = useRouter()
+    const handleClick = () => {
+        router.push(`/product/${data.id}`)
+    
+    }
+
+    const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
+        event.stopPropagation();
+        previewModal.onOpen(data);
+    }
+
+    const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
+        event.stopPropagation();
+        cart.addItem(data);
+    }
+
+  return (
+    <div onClick={handleClick} className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4'>
+        <div className='aspect-square rounded-xl bg-gray-100 relative'>
+            
+            <Image 
+            fill
+            alt="Image"
+            src={data?.Image[0]?.url}
+            className="aspect-square rounded-md object-cover"
+            />
+            <div className='opacity-0 group-hover:opacity-100 absolute bottom-5 w-full transition px-6'>
+                <div className='flex gap-x-6 justify-center'>
+                    <IconButton
+                        icon={<Expand size={20} className='text-gray-600'/>}
+                        onClick={onPreview}
+                    />
+                    <IconButton
+                        icon={<ShoppingCart size={20} className='text-gray-600'/>}
+                        onClick={onAddToCart}
+                    />
+                </div>
+            </div>
+        </div>
+        <div>
+            <p className='font-semibold text-lg'>{data.name}</p>
+            <p className='text-sm text-gray-500'>{data.category.name}</p>
+        </div>
+
+        <div>
+            <Currency data={data?.price}/>
+        </div>
+        <div>
+            {truncate(data?.description)}
+        </div>
+        <div className='flex flex-col gap-2 justify-center'>
+            <span>2 reviews</span>
+            <Rating value={5} readOnly/>
+        </div>
+        
+    </div>
+  )
+}
+
+export default ProductCard
