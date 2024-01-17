@@ -6,7 +6,9 @@
 export const publicRoutes = [
     '/',
     '/cart',
-    '/auth/new-verification'
+    '/auth/new-verification',
+    '/product/:path*',
+    '/category/:path*'
 ];
 
 /**
