@@ -29,7 +29,7 @@ async function Navbar() {
 
                 <Link href='/' className="ml-4 flex lg:ml-0 gap-x-2">
                     <img className={`font-bold text-9xl text-amber-400 ${redressed.className}`} src = "/images/myProfile.png" alt ="Logo" 
-                      width={200}
+                      width={150}
                       height={24}
                     />
                 </Link>

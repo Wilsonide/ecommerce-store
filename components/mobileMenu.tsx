@@ -2,6 +2,7 @@
 import { cn } from '@/lib/utils'
 import { Category } from '@/types'
 import { link } from 'fs'
+import { Poppins } from 'next/font/google'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useRef } from 'react'
@@ -9,6 +10,11 @@ import React, { useEffect, useRef } from 'react'
 interface componentProp{
     data: Category[]
 }
+
+const poppins = Poppins({
+    subsets:['latin'],
+    weight:['500']
+})
 
 function MobileMenu({data}: componentProp) {
 
@@ -47,11 +53,11 @@ function MobileMenu({data}: componentProp) {
                     
         </button>
 
-        <section id='mobile-menu' className=' hidden absolute z-10 top-16  bg-white text-black left-0  w-full my-4 text-5xl '>
-              <nav id="parent-link" className='lg:hidden flex flex-col h-full items-start py-2 gap-y-2 rounded border-b' aria-label='mobile'>
-                  <Link href='/' className={cn('text-2xl font-medium text-neutral-500 w-full hover:text-black p-2 px-8 active:bg-gray-100',pathname === '/' ? 'bg-gray-100 text-black' : '')}>Home</Link>
+        <section id='mobile-menu' className=' hidden absolute z-10 top-16  text-black left-0  w-full bg-teal-500  text-5xl '>
+              <nav id="parent-link" className='lg:hidden flex flex-col  items-start py-2 gap-y-2 rounded border-b  ' aria-label='mobile'>
+                  <Link href='/' className={cn(`text-sm font-medium text-neutral-500 w-full hover:text-black p-2 px-8 ',pathname === '/' ?  'text-black' : 'text-white ${poppins.className}`)}>Home</Link>
                   {routes.map((route) =>(
-                    <Link href={route.href} key={route.href} className={cn('text-2xl font-medium transition-colors hover:text-black capitalize w-full p-2 px-8 ', route.active ? "text-black bg-gray-100" : "text-neutral-500")}>
+                    <Link href={route.href} key={route.href} className={cn(`text-sm font-medium transition-colors hover:text-neutral-300 uppercase p-2 px-8 ${poppins.className}`, route.active ? "text-black" : "text-white")}>
                         {route.label}
                     </Link>
                   ))}
