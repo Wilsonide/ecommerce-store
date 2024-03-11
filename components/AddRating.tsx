@@ -8,7 +8,7 @@ import { Rating } from "@mui/material";
 import { Review, } from "@prisma/client";
 import axios from "axios";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Heading } from "./Heading";

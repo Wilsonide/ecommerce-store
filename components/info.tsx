@@ -4,7 +4,7 @@ import useCart from '@/hooks/useCart'
 import { orderType } from '@/server-actions/getPaidOrders'
 import { Product } from '@/types'
 import { Rating } from '@mui/material'
-import { Order } from '@prisma/client'
+
 import { ShoppingCart } from 'lucide-react'
 import React, { MouseEventHandler, useEffect, useState } from 'react'
 import AddRating from './AddRating'
