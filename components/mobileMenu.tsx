@@ -55,9 +55,9 @@ function MobileMenu({data}: componentProp) {
 
         <section id='mobile-menu' className=' hidden absolute z-10 top-16  text-black left-0  w-full bg-teal-500  text-5xl '>
               <nav id="parent-link" className='lg:hidden flex flex-col  items-start py-2 gap-y-2 rounded border-b  ' aria-label='mobile'>
-                  <Link href='/' className={cn(`text-sm font-medium text-neutral-500 w-full hover:text-black p-2 px-8 ',pathname === '/' ?  'text-black' : 'text-white ${poppins.className}`)}>Home</Link>
+                  <Link href='/' className={cn(`text-sm font-medium transition-colors hover:text-neutral-300 uppercase p-2 px-8 ${poppins.className}`, pathname === '/' ? "text-neutral-300" : "text-white")}>Home</Link>
                   {routes.map((route) =>(
-                    <Link href={route.href} key={route.href} className={cn(`text-sm font-medium transition-colors hover:text-neutral-300 uppercase p-2 px-8 ${poppins.className}`, route.active ? "text-black" : "text-white")}>
+                    <Link href={route.href} key={route.href} className={cn(`text-sm font-medium transition-colors hover:text-neutral-300 uppercase p-2 px-8 ${poppins.className}`, route.active ? "text-neutral-300" : "text-white")}>
                         {route.label}
                     </Link>
                   ))}
