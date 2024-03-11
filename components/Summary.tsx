@@ -51,7 +51,7 @@ function Summary() {
   const config:PaystackProps= {
     label:user.name as string,
     email: user?.email as string,
-    publicKey : process.env.API_PUBLIC_KEY as string,
+    publicKey : "pk_live_7f43187dfa92b20ee02ea32681ae091034c00be8", //process.env.API_PUBLIC_KEY as string,
     amount :totalPrice * 100,
     currency: "NGN",
   
