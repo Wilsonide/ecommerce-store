@@ -1,8 +1,22 @@
+import { User } from "@prisma/client";
+
+
 export interface Billboard{
     id : string;
     label : string;
     imageUrl: string;
 
+}
+
+export type Review = {
+    id: string;
+    userId: string;
+    productId: string;
+    rating: number;
+    comment: string;
+    createdAt: Date;
+    updatedAt: Date;
+    user: User;
 }
 
 
@@ -21,6 +35,7 @@ export interface Product{
     isFeatured : boolean;
     size : Size;
     color : Color;
+    reviews : Review[]
     Image: Image[];
     price: string,
     description : string

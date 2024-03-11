@@ -1,11 +1,19 @@
+'use client'
 import React, { useState } from 'react'
 import {useEffect} from 'react'
 import {toast} from 'react-hot-toast'
 import useCart from '@/hooks/useCart'
-import Currency from './ui/currency'
+import Currency, { formatter } from './ui/currency'
 import axios from 'axios'
-import { PaystackButton } from 'react-paystack'
+import { PaystackButton, usePaystackPayment } from 'react-paystack'
 import { PaystackProps } from 'react-paystack/dist/types'
+import { redirect } from 'next/navigation'
+import { useCurrentUser } from '@/hooks/useCurrentUser'
+import { Button } from './ui/button'
+import { sendConfirmOrderEmail } from '@/lib/mail'
+
+
+
 
 
 type referenceObj={
@@ -17,51 +25,73 @@ type referenceObj={
   trxref: string
 }
 
+
+
 function Summary() {
+
+  const user = useCurrentUser()
+  if (!user) {
+    redirect('/auth/login');
+  }
   const [success, setSuccess] = useState(false)
+  const [ref, setRef] = useState('')
   const items = useCart(state=>state.items)
   const removeAll = useCart((state)=>state.removeAll)
 
   const totalPrice = items.reduce((totalPrice: number, item: { price: any }) => {
     return totalPrice + Number(item.price)
-  },0)
+  },0) 
+
+  useEffect(()=>{
+    setSuccess(false)
+    setRef(''+ Math.floor(Math.random() * 1000000000000 + 1))
+  },[success])
 
 
-  const config: PaystackProps = {
-    email: "ichekuw@gmail.com",
-    publicKey : "",
-    amount :totalPrice,
-    currency: "USD",
+  const config:PaystackProps= {
+    label:user.name as string,
+    email: user?.email as string,
+    publicKey : process.env.API_PUBLIC_KEY as string,
+    amount :totalPrice * 100,
+    currency: "NGN",
+  
   }
 
-  const onSuccess = async(reference:referenceObj) => {
-    const res = await axios.post(`http://localhost:3000/api/653a5912769abb469a678a9a/verify/${reference.reference}`,{productIds: items.map(item => item.id)})
-    const verifyData = await res.data
 
-    if (verifyData.status === 'success') {
-      setSuccess(true)
-      removeAll()
-    }
-  }
+
+  const onSuccess = (reference:referenceObj) => {
+
+    const res = axios.post(`/api/verify/${reference.reference}`,{productsIds: items.map((item) =>item.id)})
+       .then(response =>{
+        if (response.data.data.status === 'success') {
+          setSuccess(true)
+          removeAll()
+          return toast.success('payment successful')
+        } 
+        return toast.error('An error occurred')
+      })
+      .catch(err =>{
+        console.log(err);
+        return toast.error('An error occurred')
+        
+      }); 
+    
+  } 
 
   const onClose = () => {
-    toast.error('payment cancelled')
+    return toast.error('payment cancelled')
   }
 
   const componentProps = {
     ...config,
-   text : `pay ${<Currency data={totalPrice}/>}`,
-   onSuccess,
-   onClose
+    text: `Checkout`,
+    onSuccess,
+    onClose
   }
-
 
 
   
 
-  useEffect(()=>{
-    setSuccess(false);
-  },[success])
 
 
   return (
@@ -75,7 +105,10 @@ function Summary() {
             <Currency data={totalPrice}/> 
           </div>
         </div>
-        <PaystackButton {...componentProps} className='w-full mt-6'/>
+        <Button className="w-full mt-6">
+          <PaystackButton {...componentProps} />
+        </Button>
+        
     </div>
   )
 }

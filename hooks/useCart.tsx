@@ -1,21 +1,10 @@
-import { Category, Color, Size, Image } from '@/types';
+import { Category, Color, Size, Image, Product } from '@/types';
+
 import {toast} from 'react-hot-toast'
 import { create } from "zustand";
 import {persist, createJSONStorage} from "zustand/middleware"
 
-interface Product{
-    id : string;
-    category : Category;
-    categoryId : string;
-    name : string;
-    isFeatured : boolean;
-    size : Size;
-    color : Color;
-    Image: Image[];
-    price: string,
-    description : string
-    quantity : number
-}
+
 
 
 interface CartProp{

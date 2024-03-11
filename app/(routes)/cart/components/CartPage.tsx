@@ -28,7 +28,7 @@ const Cartcontent = () => {
   return (
     <div className='bg-white'>
         <Container>
-            <div className='lg:px-8 px-4 py-16 sm:px-6'>
+            <div className='lg:px-8 px-4 py-16 sm:px-6 mt-16'>
                 <h1 className='font-bold text-3xl text-black'>Shopping Cart</h1>
                 <div className='mt-12 lg:grid lg:grid-cols-12 lg:items-start gap-x-12'>
                     <div className='lg:col-span-7'>

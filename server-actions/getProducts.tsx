@@ -6,6 +6,7 @@ interface Query{
     sizeId?: string,
     categoryId?: string,
     colorId?: string
+    searchTerm?: string
 }
 
 const URL = `${process.env.NEXT_PUBLIC_API_URL}/products`

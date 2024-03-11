@@ -126,3 +126,45 @@ export const sendResetPasswordEmail = async (email:string, token:string)=>{
         
     }
 }
+
+export const sendConfirmOrderEmail = async (email:string, referenceId:string)=>{
+    try{
+        
+
+    const transporter = nodemailer.createTransport({
+        service : "gmail",
+        host : "smtp.gmail.com",
+        port: 587,
+        secure: false,
+           
+            
+        auth: {
+            user : process.env.USER_EMAIL ,
+            pass : process.env.APP_PASSWORD
+        },
+        tls: {
+            rejectUnauthorized: false,
+            }
+
+        })
+
+        const mailOptions = {
+            from : process.env.USER_EMAIL,
+            to: email,
+            subject: 'Order Summary',
+            html: `<p>Your order was successful. Your orderId is : ${referenceId}</p>`,
+                      
+               
+        }
+
+        const mailResponse = await transporter.sendMail(mailOptions)
+
+        return mailResponse
+    }
+    
+     catch (error:any) {
+        throw new Error(error.message)
+
+        
+    }
+}

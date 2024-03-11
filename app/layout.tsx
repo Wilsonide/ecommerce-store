@@ -22,7 +22,6 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const categories = await getCategories()
-  console.log('looooooooggggg', categories)
 
   return (
     <html lang="en">

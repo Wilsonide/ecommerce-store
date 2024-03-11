@@ -45,7 +45,7 @@ const decreaseQuantity: MouseEventHandler<HTMLButtonElement> = (event) => {
     <>
         <li className='flex py-6 border-t'>
             <div className='relative h-24 w-24 rounded-d overflow-hidden sm:h-48 sm:w-48'>
-                <div className='absolute h-5 w-5 top-0 rounded-full z-50 bg-black flex items-center justify-center'>
+                <div className='absolute h-5 w-5 top-0 rounded-full z-40 bg-black flex items-center justify-center'>
                     <span className='text-white p-1'>{quantity}</span>
                 </div>
                 <Image

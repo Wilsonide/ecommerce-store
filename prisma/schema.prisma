@@ -29,7 +29,6 @@ model User {
   accounts              Account[]
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
-  reviews               Review[]
 }
 
 model Account {
@@ -170,15 +169,14 @@ model Product {
 }
 
 model Review {
-  id        String   @id @default(cuid())
-  userId    String
+  id String @id @default(cuid())
+
   productId String
   rating    Int
   comment   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   product   Product  @relation(fields: [productId], references: [id])
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Image {
@@ -191,9 +189,11 @@ model Image {
 }
 
 model Order {
-  id        String      @id @default(cuid())
-  storeId   String
-  store     Store       @relation("storeToProduct", fields: [storeId], references: [id])
+  id      String @id @default(cuid())
+  storeId String
+
+  store Store @relation("storeToProduct", fields: [storeId], references: [id])
+
   OrderItem OrderItem[]
   isPaid    Boolean     @default(false)
   phone     String      @default("")

@@ -38,7 +38,7 @@ function MobileMenu({data}: componentProp) {
 
   return (
     <>
-        <button id='hamburger-btn' className='md:hidden h-7 w-7 cursor-pointer relative flex items-center justify-center'>
+        <button id='hamburger-btn' className='md:hidden h-8 w-7 cursor-pointer relative flex items-center justify-center'>
             <div className="bg-white w-7 h-1 transition-all duration-500 rounded absolute top-4 -mt-0.5 before:content-[''] before:bg-white before:h-1 before:w-7 before:rounded before:absolute before:transition-all before:duration-500  before:-translate-y-2 before:-translate-x-3.5
             after:content-[''] after:bg-white after:h-1 after:w-7 after:rounded after:absolute after:transition-all after:duration-500  after:translate-y-2 after:-translate-x-3.5">
                 

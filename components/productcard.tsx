@@ -34,6 +34,9 @@ function ProductCard({data}:ComponentProp) {
         cart.addItem(data);
     }
 
+
+    const productRating = data.reviews?.reduce((acc, item) => item.rating + acc,0)/data.reviews?.length
+
   return (
     <div onClick={handleClick} className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4'>
         <div className='aspect-square rounded-xl bg-gray-100 relative'>
@@ -69,8 +72,8 @@ function ProductCard({data}:ComponentProp) {
             {truncate(data?.description)}
         </div>
         <div className='flex flex-col gap-2 justify-center'>
-            <span>2 reviews</span>
-            <Rating value={5} readOnly/>
+            <span>{data.reviews.length} reviews</span>
+            <Rating value={productRating} readOnly/>
         </div>
         
     </div>

@@ -6,7 +6,7 @@ interface ComponentProp{
     data: string|number
 }
 
-export const formatter = new Intl.NumberFormat("en-US",{style:'currency',currency:'USD'});
+export const formatter = new Intl.NumberFormat("en-US",{style:'currency',currency:'NGN'});
 
 
 function Currency({data}:ComponentProp) {
@@ -19,7 +19,7 @@ function Currency({data}:ComponentProp) {
     }
 
   return (
-    <div className="font-semibold">{formatter.format(Number(data))}</div>
+    <span className="font-semibold">{formatter.format(Number(data))}</span>
   )
 }
 
