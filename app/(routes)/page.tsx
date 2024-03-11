@@ -27,8 +27,10 @@ const HomePage = async ({searchParams}:PageProps) => {
   }
 }) */
 
+const searchProd = searchParams.searchTerm?.toLowerCase()
+
 const searchProducts = products.filter((product) =>{
-  return product.name.includes(searchParams.searchTerm)
+  return product.name.toLowerCase().includes(searchProd)
 })
 
 

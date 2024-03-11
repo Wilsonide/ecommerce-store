@@ -72,7 +72,7 @@ const Search = () => {
                                     
                                     <FormItem>
                                         <FormControl>
-                                        <div className='flex items-center justify-center gap-2 w-50 rounded-md bg-gray-200'>
+                                        <div className='flex items-center justify-center gap-2 w-[2/6] rounded-md bg-gray-200'>
                                             <input 
                                                 className='outline-none sm:w-30 bg-gray-200 h-8 rounded-md ml-2'
                                                 {...field}
