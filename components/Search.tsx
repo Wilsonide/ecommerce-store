@@ -5,12 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Form, FormField, FormItem, FormControl } from "./ui/form"
 
-import { Input } from './ui/input'
-import { startTransition, useState } from 'react'
-import { Button } from './ui/button'
 import { useRouter } from 'next/navigation'
 import queryString from 'query-string'
-import axios from 'axios'
 import { SearchIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -65,7 +61,7 @@ const Search = () => {
   return (
     
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} id="myForm" className={cn("space-y-6 w-full md:hidden")}>
+            <form onSubmit={form.handleSubmit(onSubmit)} id="myForm" className={cn("space-y-6 w-full hidden md:block")}>
                     
                 <FormField
                 control={form.control}

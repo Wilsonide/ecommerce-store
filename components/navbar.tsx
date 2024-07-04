@@ -27,7 +27,7 @@ async function Navbar() {
     <div id='navbar' className='lg:border-b-2 border-b-2 border-white bg-black  fixed w-full top-0 z-50 '>
         <Container>
             
-            <div className='flex flex-col justify-center items-between'>
+            {/* <div className='flex flex-col justify-center items-between'> */}
               <div className='h-16 flex items-center justify-between relative px-4 sm:px-6 lg:px-4 gap-4'>
                 <MobileMenu data={categories}/>
                 <img className='object-cover h-[3rem]'  src = "/images/myProfile.png" alt ="Logo" 
@@ -43,14 +43,14 @@ async function Navbar() {
                   <UserButton/>
                 </div>
               </div>
-              <div className='bg-white p-2 md:p-0'>
+              {/* <div className='bg-white p-2 md:p-0'>
                 <div className='w-[50vw] flex items-center justify-center text-center mx-auto'>
                   <Search/>
                 </div>
                
-              </div>
+              </div> */}
               
-            </div> 
+        
             
         </Container>
         
