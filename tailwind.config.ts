@@ -1,5 +1,3 @@
-const typographyPlugin = require('./typography');
-
 const config = {
   darkMode: ["class"],
   content: [
@@ -76,7 +74,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),typographyPlugin],
+  plugins: [require("tailwindcss-animate")],
 } 
 
 export default config
