@@ -53,11 +53,11 @@ function MobileMenu({data}: componentProp) {
                     
         </button>
 
-        <section id='mobile-menu' className=' hidden absolute z-10 top-16  text-black left-0  w-full bg-teal-500  text-5xl '>
-              <nav id="parent-link" className='lg:hidden flex flex-col  items-start py-2 gap-y-2 rounded border-b  ' aria-label='mobile'>
-                  <Link href='/' className={cn(`text-sm font-medium transition-colors hover:text-neutral-300 uppercase p-2 px-8 ${poppins.className}`, pathname === '/' ? "text-neutral-300" : "text-white")}>Home</Link>
+        <section id='mobile-menu' className=' hidden absolute z-10 top-[5rem] right-4 text-black  text-5xl  '>
+              <nav id="parent-link" className='lg:hidden flex flex-col min-w-[15rem] bg-blacklight rounded-lg items-start h-fit gap-1 p-2' aria-label='mobile'>
+                  <Link href='/' className={cn(`text-sm cursor-pointer rounded-lg font-medium px-12 py-3 w-full bg-black transition-colors hover:border-b-2 border-yellow-300 pb-2 ${poppins.className}`, pathname === '/' ? "text-yellow-300" : "text-white")}>Home</Link>
                   {routes.map((route) =>(
-                    <Link href={route.href} key={route.href} className={cn(`text-sm font-medium transition-colors hover:text-neutral-300 uppercase p-2 px-8 ${poppins.className}`, route.active ? "text-neutral-300" : "text-white")}>
+                    <Link href={route.href} key={route.href} className={cn(`text-sm cursor-pointer rounded-lg font-medium px-12 py-3 w-full bg-black transition-colors hover:border-b-2 border-yellow-300 pb-2 ${poppins.className}`, route.active ? "text-yellow-300" : "text-white")}>
                         {route.label}
                     </Link>
                   ))}

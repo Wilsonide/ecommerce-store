@@ -8,6 +8,7 @@ import Footer from '../components/footer'
 import Navbar from '../components/navbar'
 import './globals.css'
 
+
 const font = Urbanist({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

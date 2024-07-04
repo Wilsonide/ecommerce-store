@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import queryString from 'query-string'
 import axios from 'axios'
 import { SearchIcon } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const RatingSchema = z.object({
     searchTerm: z.string()
@@ -52,6 +53,7 @@ const Search = () => {
         skipNull: true,
        })
        console.log(values)
+       form.reset()
        router.push(url) 
 
     
@@ -63,36 +65,34 @@ const Search = () => {
   return (
     
         <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 hidden md:block">
+            <form onSubmit={form.handleSubmit(onSubmit)} id="myForm" className={cn("space-y-6 w-full md:hidden")}>
                     
-                        <FormField
-                                control={form.control}
-                                name='searchTerm'
-                                render = {({field}) => (
+                <FormField
+                control={form.control}
+                name='searchTerm'
+                render = {({field}) => (
                                     
-                                    <FormItem>
-                                        <FormControl>
-                                        <div className='flex items-center justify-center gap-2 rounded-md bg-gray-200'>
-                                            <input 
-                                                className='outline-none bg-gray-200 h-8 rounded-md ml-2'
-                                                {...field}
-                                                placeholder='Search'
-                                                type='text'
+                    <FormItem>
+                        <FormControl>
+                        <div className='flex items-center justify-center gap-2 rounded-md bg-gray-200'>
+                            <input 
+                            className='outline-none bg-gray-200 h-8 rounded-md ml-2'
+                            {...field}
+                            placeholder='Search'
+                            type='text'
                                                
-                                            /> 
-                                            <button className='h-8 bg-gray-200 rounded-md px-2' type='submit'>
-                                                <SearchIcon className='h-4 w-4'/>
-                                            </button>
-                                        </div>
-                                        </FormControl>
+                            /> 
+                            <button className='h-8 bg-gray-200 rounded-md px-2' type='submit'>
+                                <SearchIcon className='h-4 w-4'/>
+                            </button>
+                        </div>
+                        </FormControl>
                                     
-                                    </FormItem>
+                    </FormItem>
                                     
                                 )}
-                            />
-
-                            
-                </form>
+                />               
+            </form>
         </Form>
 
   )

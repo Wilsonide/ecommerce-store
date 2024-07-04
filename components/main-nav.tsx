@@ -22,7 +22,7 @@ function MainNav({data}: MainNavProps) {
   return (
     <nav className='md:mx-6 md:flex md:items-center w-full md:justify-center md:space-x-6 hidden '>
         {routes.map((route) =>(
-            <Link href={route.href} key={route.href} className={cn(`text-sm font-medium transition-colors hover:text-neutral-300 uppercase ${poppins.className}`, route.active ? "text-black" : "text-white")}>
+            <Link href={route.href} key={route.href} className={cn(`text-sm font-medium transition-colors capitalize hover:border-b-2 border-yellow-300 pb-2 ${poppins.className}`, route.active ? "text-yellow-300" : "text-white")}>
                 {route.label}
             </Link>
         ))}
