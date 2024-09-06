@@ -21,9 +21,9 @@ export async function POST (req: Request){
         
         const reviews = product?.reviews.find((review:Review) => review.id === User.id)
 
-        if ( reviews || !deliveredOrders){
+        /* if ( reviews || !deliveredOrders){
             return NextResponse.error()
-        } 
+        }  */
 
        await db.review.create({
         data: {

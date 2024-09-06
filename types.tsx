@@ -41,6 +41,19 @@ export interface Product{
     description : string
     quantity : number
 }
+export interface cartProduct{
+    id : string;
+    category : Category;
+    name : string;
+    size : Size;
+    color : Color;
+    reviews : Review[]
+    Image: Image[];
+    price: string,
+    description : string
+    cartQuantity : number
+    quantity : number
+}
 
 export interface Image{
     id : string;

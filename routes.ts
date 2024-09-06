@@ -4,12 +4,13 @@
  * @type {string[]} 
  */
 export const publicRoutes = [
-    '/',
-    '/cart',
     '/auth/new-verification',
-    '/product/:path*',
-    '/category/:path*'
+    '/product',
+    '/category',
+    '/testing'
 ];
+
+export const Root =  '/';
 
 /**
  * An array of routes that are used for authentication. 

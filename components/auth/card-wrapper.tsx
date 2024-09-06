@@ -8,12 +8,14 @@ import { Social } from './Social'
 interface CardComponentProp{
     children:React.ReactNode,
     headerLabel:string,
+    headerTitle?:string,
     backButtonLabel?:string,
+    backButtonLink?:string,
     backButtonHref?:string,
     showSocial?:boolean
 }
 
-export const CardWrapper = ({children,headerLabel,backButtonLabel,backButtonHref,showSocial}:CardComponentProp) => {
+export const CardWrapper = ({children,headerLabel,backButtonLabel,backButtonHref,showSocial,backButtonLink}:CardComponentProp) => {
   return (
     <Card className='w-[400px] shadow-md mt-[8rem]'>
         <CardHeader>
@@ -26,7 +28,9 @@ export const CardWrapper = ({children,headerLabel,backButtonLabel,backButtonHref
             </CardFooter>
         )}
         <CardFooter>
-            <BackButton label={backButtonLabel || ""} href={backButtonHref || ""}/>
+            <BackButton label={backButtonLabel || ""} 
+                href={backButtonHref || ""}
+                link={backButtonLink || ""}/>
         </CardFooter>
         
     </Card>

@@ -3,7 +3,7 @@ import * as z from 'zod'
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 import { orderType } from "@/server-actions/getPaidOrders";
-import { Product } from "@/types";
+import { cartProduct } from "@/types";
 import { Rating } from "@mui/material";
 import { Review, } from "@prisma/client";
 import axios from "axios";
@@ -22,7 +22,7 @@ import { useRouter } from 'next/navigation';
 
 
 interface AddRatingProps{
-    product : Product
+    product : cartProduct
     orders : orderType
 }
 
@@ -73,9 +73,9 @@ const AddRating : React.FC<AddRatingProps> = ({ product,orders}) => {
         
         const reviews = product?.reviews?.find((review:Review) => review.productId === product?.id)
 
-         if (reviews || !deliveredOrders){
+         /* if (reviews || !deliveredOrders){
             return null
-        } 
+        }  */
 
     return (
         <div className="flex flex-col gap-2 max-w-[500px]">
@@ -83,11 +83,29 @@ const AddRating : React.FC<AddRatingProps> = ({ product,orders}) => {
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className='space-y-4'>
+                <FormField
+                        control={form.control}
+                        name='comment'
+                        render = {({field}) => (
+                            <FormItem>
+                                <FormControl>
+                                <Input 
+                                        {...field}
+                                        placeholder='Comment here'
+                                        type='text'
+                                        disabled={isLoading}
+                                    /> 
+                                </FormControl>
+                                <FormMessage/>
+                            </FormItem>
+                        )}
+                    />
                     <FormField 
                         control={form.control}
                         name="rating"
                         render={({field}) => (
-                            <FormItem>
+                            <FormItem className='flex items-center text-center gap-2'>
+                                <FormLabel className='text-lg'>Rating : </FormLabel>
                                 <FormControl>
                                     <Rating 
                                         {...field}
@@ -101,27 +119,10 @@ const AddRating : React.FC<AddRatingProps> = ({ product,orders}) => {
                             )}
                         />
 
-                        <FormField
-                        control={form.control}
-                        name='comment'
-                        render = {({field}) => (
-                            <FormItem>
-                                <FormLabel className='text-2xl font-semibold'>Comments</FormLabel>
-                                <FormControl>
-                                <Input 
-                                        {...field}
-                                        placeholder='Comment here'
-                                        type='text'
-                                        disabled={isLoading}
-                                    /> 
-                                </FormControl>
-                                <FormMessage/>
-                            </FormItem>
-                        )}
-                    />
+                        
                     </div>
-                    <Button className='w-full ' type='submit' disabled={isLoading}>
-                        Add Rating
+                    <Button className='' type='submit' disabled={isLoading}>
+                        Add Review
                     </Button>
                 </form>
             </Form>

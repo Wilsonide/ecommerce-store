@@ -1,4 +1,4 @@
-import { Category, Color, Size, Image, Product } from '@/types';
+import {Product } from '@/types';
 
 import {toast} from 'react-hot-toast'
 import { create } from "zustand";

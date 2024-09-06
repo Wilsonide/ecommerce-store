@@ -10,13 +10,17 @@ import queryString from 'query-string'
 import { SearchIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+type props = {
+    className? : string
+  }
+
 const RatingSchema = z.object({
     searchTerm: z.string()
     
 })
 
 
-const Search = () => {
+const Search = ({className}:props) => {
    
     const router = useRouter()
 
@@ -61,7 +65,7 @@ const Search = () => {
   return (
     
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} id="myForm" className={cn("space-y-6 w-full hidden md:block")}>
+            <form onSubmit={form.handleSubmit(onSubmit)} id="myForm" className={cn("w-full",className)}>
                     
                 <FormField
                 control={form.control}
@@ -70,15 +74,15 @@ const Search = () => {
                                     
                     <FormItem>
                         <FormControl>
-                        <div className='flex items-center justify-center gap-2 rounded-md bg-gray-200'>
+                        <div className='flex items-center justify-center rounded-md '>
                             <input 
-                            className='outline-none bg-gray-200 h-8 rounded-md ml-2'
+                            className='outline-none h-8 ml-2 border rounded-l-md  placeholder:text-center px-2'
                             {...field}
-                            placeholder='Search'
+                            placeholder='  Search'
                             type='text'
                                                
                             /> 
-                            <button className='h-8 bg-gray-200 rounded-md px-2' type='submit'>
+                            <button className='h-8 bg-gray-200 px-2 rounded-r-md' type='submit'>
                                 <SearchIcon className='h-4 w-4'/>
                             </button>
                         </div>

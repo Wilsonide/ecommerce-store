@@ -1,45 +1,89 @@
 "use client"
 
-import useCart from '@/hooks/useCart'
 import { orderType } from '@/server-actions/getPaidOrders'
-import { Product } from '@/types'
+import { cartProduct } from '@/types'
 import { Rating } from '@mui/material'
+import { addCartProduct, decrement, getCartCount, getTotalAmount, increment} from '@/app/features/cart/cartSlice'
 
 import { ShoppingCart } from 'lucide-react'
 import React, { MouseEventHandler, useEffect, useState } from 'react'
+import { useDispatch,useSelector } from 'react-redux'
 import AddRating from './AddRating'
 import { ListRating } from './ListRating'
 import {Button} from './ui/button'
 import Currency from './ui/currency'
 import { Separator } from './ui/separator'
+import { RootState } from '@/app/features/store'
 
 interface InfoProps{
-    data: Product
+    data: cartProduct
     orders: orderType
 }
 
+
 function Info({data, orders}: InfoProps) {
 const [mounted,setMounted] = useState(false)
+const [count, setCount] = useState(data.cartQuantity)
+
+const dispatch = useDispatch()
+const cartItems = useSelector<RootState,cartProduct[]>((state)=> state.cart.cartItems)
+
+const product = data
+const cartItem = cartItems.find(item => item.id === product.id)
+        
 
 
-const cart = useCart()
 
-const quantity = cart.quantity
 
-const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation();
-    cart.addItem(data);
-    }   
 
 const addQuantity: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation();
-    cart.increaseQuantity(data);
-    }   
-
+        event.stopPropagation();
+        let cartIndex = cartItems.findIndex(item => item.id === product.id)
+        if (cartIndex === -1) {
+            if(product.quantity > count) {
+                setCount((prev)=> prev + 1)
+                product.cartQuantity += 1
+                console.log(count)
+            }
+            else{
+                product.cartQuantity = product.quantity
+                setCount(product.cartQuantity)
+                console.log(count)
+            }
+            
+           
+            } else {
+                dispatch(increment(product))
+            }
+        }
+          
+    
     const decreaseQuantity: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation();
-    cart.decreaseQuantity(data);
-    }  
+        event.stopPropagation();
+        let cartIndex = cartItems.findIndex(item => item.id === product.id)
+        if (cartIndex === -1){
+            if(product.cartQuantity >= 2){
+                product.cartQuantity -= 1
+                setCount((prev)=> prev - 1)
+                console.log(count)
+            }
+            else{
+                product.cartQuantity = 1
+                setCount(product.cartQuantity)
+                console.log(count)
+            }
+        } else {
+            dispatch(decrement(product))
+        }
+        
+        }  
+        const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
+            event.stopPropagation();
+            /* cart.addItem(data); */
+            dispatch(addCartProduct(product))
+            
+        
+        }
     const btnStyles = 'border-[1.2px] border-slate-300 px-2 rounded' 
 
     const productRating = data.reviews?.reduce((acc, item) => item.rating + acc,0)/data.reviews?.length
@@ -98,7 +142,7 @@ const addQuantity: MouseEventHandler<HTMLButtonElement> = (event) => {
                     <div className="flex gap-4 items-center text-base">
 
                         <button onClick={decreaseQuantity} className={btnStyles}>-</button>
-                            {quantity}
+                            {cartItem? cartItem.cartQuantity : product.cartQuantity}
                         <button className={btnStyles} onClick={addQuantity}>+</button>
                     </div>
 
@@ -114,11 +158,13 @@ const addQuantity: MouseEventHandler<HTMLButtonElement> = (event) => {
             
         </div>
         <div className='flex flex-col mt-20 gap-4 '>
-            <AddRating product={data} orders={orders}/>
-            <ListRating product={data}/>
+            <AddRating product={product} orders={orders}/>
+            <Separator/>
+            <ListRating product={product}/>
         </div>
     </>
   )
 }
+
 
 export default Info

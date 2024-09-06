@@ -5,8 +5,12 @@ import ToastProvider from '@/providers/toastProvider'
 import type { Metadata } from 'next'
 import { Urbanist} from 'next/font/google'
 import Footer from '../components/footer'
-import Navbar from '../components/navbar'
+
 import './globals.css'
+
+
+
+import { cn } from '@/lib/utils'
 
 
 const font = Urbanist({ subsets: ['latin'] })
@@ -22,19 +26,22 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const categories = await getCategories()
+  const categories = await getCategories() 
+  /* store.dispatch(productsSlice.endpoints.getProducts.initiate()) */
 
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={font.className }>
-          <ModalProvider/>
-          <ToastProvider/>
-          {/* @ts-ignore */}
-          <Navbar/>
-          {children}
-          <Footer data={categories}/>
-        </body>
+          <body className={cn('flex flex-col',font.className)} >
+            <ModalProvider/>
+            <ToastProvider/>
+            
+            <div className='flex flex-col flex-1'>
+              {children}
+            </div>
+            
+            {<Footer data={categories}/>}
+          </body>
       </AuthProvider>
     </html>
   )

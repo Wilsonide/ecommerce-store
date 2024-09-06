@@ -2,12 +2,15 @@
 import React from 'react'
 import {Button} from './ui/button'
 import { ShoppingBag } from 'lucide-react'
-import useCart from '@/hooks/useCart'
 import { useRouter } from 'next/navigation'
+import {useSelector} from "react-redux"
+import { RootState } from '@/app/features/store'
+import { cartProduct } from '@/types'
+
 
 function NavbarActions() {
 
-const cart = useCart()   
+const cartItems = useSelector<RootState,cartProduct[]>((state)=> state.cart.cartItems) 
 const router = useRouter() 
 
 const [mounted, setMounted] = React.useState(false)
@@ -22,12 +25,12 @@ if(!mounted) {
 
   return (
     <div className='ml-auto flex items-center gap-x-4'>
-        <Button onClick={()=> router.push('/cart')} className='flex items-center rounded-full bg-white  px-4 py-2 text- hover:bg-white'>
+        <Button onClick={()=> router.push('/cart')} className='flex items-center rounded-full bg-white  px-2 py-1 text- hover:bg-white'>
             <ShoppingBag
                 size={20}
                 color='black'
             />
-            <span className='ml-2 font-medium text-sm text-black'>{cart.items.length}</span>
+            <span className='ml-2 font-medium text-sm text-black'>{cartItems.length}</span>
         </Button>
     </div>
   )

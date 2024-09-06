@@ -20,8 +20,8 @@ function MainNav({data}: MainNavProps) {
   const pathname = usePathname()
   const routes = data.map((route) => ({href: `/category/${route.id}`, label: route.name, active : pathname === `/category/${route.id}`}))
   return (
-    <nav className='md:mx-6 md:flex md:items-center w-full md:justify-center md:space-x-6 hidden '>
-         <Link href='/' className={cn(`text-sm font-medium transition-colors capitalize hover:border-b-2 border-yellow-300 pb-2 ${poppins.className}`, pathname === '/' ? "text-yellow-300" : "text-white")}>
+    <nav className=' sm:mx-6 sm:flex sm:items-center w-full sm:justify-center sm:space-x-6 hidden '>
+         <Link href='/' className={cn(`sm:text-nowrap text-sm font-medium transition-colors capitalize hover:border-b-2 border-yellow-300 pb-2 ${poppins.className}`, pathname === '/' ? "text-yellow-300" : "text-white")}>
                 Home
         </Link>
         {routes.map((route) =>(

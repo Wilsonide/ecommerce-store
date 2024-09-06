@@ -20,6 +20,7 @@ const PreviewModal = ()=>{
                     <Gallery images={product.Image}/>
                 </div>
                 <div className="sm:col-span-8 lg:col-span-7">
+                    {/* @ts-ignore */}
                     <Info data={product} orders={[]}/>
                 </div>
             </div>

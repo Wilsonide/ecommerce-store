@@ -41,7 +41,7 @@ function Filter({valueKey, name, data}: FilterProps) {
         <div className='flex flex-wrap gap-2'>
             {data.map((item) => (
                 <div key={item.id} className='flex items-center'>
-                    <Button className={cn('rounded-md text-gray-800 p-2 bg-white border-gray-300 border ', selectedValue === item.id && 'bg-black text-white')} onClick={()=>handleFilter(item.id)}>
+                    <Button className={cn('rounded-md text-gray-800 p-2 bg-white border-gray-300 border hover:text-white ', selectedValue === item.id && 'bg-black text-white')} onClick={()=>handleFilter(item.id)}>
                         {item.name}
                     </Button>
 

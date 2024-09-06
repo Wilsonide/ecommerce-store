@@ -25,7 +25,7 @@ export async function POST(req: Request, { params }: { params: { reference: stri
         const res = await fetch(`https://api.paystack.co/transaction/verify/${params.reference}`, {
             method: 'GET',
             headers: {
-                Authorization: "sk_live_71ec7d028eaa5b3fb57935c3d2b0a54e800459b8"//process.env.API_SECRET_KEY as string
+                Authorization: process.env.NEXT_SECRET_API_KEY as string
             }
         })
         const data = await res.json();

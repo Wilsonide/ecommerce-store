@@ -7,9 +7,13 @@ import IconButton from './ui/iconButton'
 import Currency from './ui/currency'
 import { useRouter } from 'next/navigation'
 import usePreviewModal from '@/hooks/usePreview-modal'
-import useCart from '@/hooks/useCart'
 import { Rating } from '@mui/material'
 import { truncate } from '@/lib/utils'
+import {useDispatch} from "react-redux"
+import {
+    addCartProduct,
+} from "@/app/features/cart/cartSlice"
+
 
 interface ComponentProp{
     data: Product
@@ -17,7 +21,7 @@ interface ComponentProp{
 
 function ProductCard({data}:ComponentProp) {
     const previewModal = usePreviewModal()
-    const cart = useCart()
+    const dispatch = useDispatch()
     const router = useRouter()
     const handleClick = () => {
         router.push(`/product/${data.id}`)
@@ -31,7 +35,23 @@ function ProductCard({data}:ComponentProp) {
 
     const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.stopPropagation();
-        cart.addItem(data);
+        const product = {
+            id : data.id,
+            category : data.category,
+            name : data.name,
+            size : data.size,
+            color : data.color,
+            reviews : data.reviews,
+            Image: data.Image,
+            price: data.price,
+            description : data.description,
+            cartQuantity : 1,
+            quantity : data.quantity
+        }
+        /* cart.addItem(data); */
+        dispatch(addCartProduct(product))
+        
+
     }
 
 

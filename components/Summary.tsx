@@ -1,16 +1,20 @@
 'use client'
 import React, { useState } from 'react'
+import { useDispatch,useSelector } from 'react-redux'
 import {useEffect} from 'react'
 import {toast} from 'react-hot-toast'
 import useCart from '@/hooks/useCart'
-import Currency, { formatter } from './ui/currency'
+import Currency from './ui/currency'
 import axios from 'axios'
-import { PaystackButton, usePaystackPayment } from 'react-paystack'
+import { PaystackButton } from 'react-paystack'
 import { PaystackProps } from 'react-paystack/dist/types'
-import { redirect } from 'next/navigation'
+
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { Button } from './ui/button'
 import { sendConfirmOrderEmail } from '@/lib/mail'
+import { RootState } from '@/app/features/store'
+import {removeAll} from '@/app/features/cart/cartSlice'
+import { cartProduct } from '@/types'
 
 
 
@@ -28,19 +32,20 @@ type referenceObj={
 
 
 function Summary() {
+  const dispatch = useDispatch()
+  const totalAmount = useSelector<RootState,number>((state)=> state.cart.totalAmount)
+  const cartItems = useSelector<RootState,cartProduct[]>((state)=> state.cart.cartItems)
 
   const user = useCurrentUser()
-  if (!user) {
-    redirect('/auth/login');
-  }
   const [success, setSuccess] = useState(false)
   const [ref, setRef] = useState('')
-  const items = useCart(state=>state.items)
-  const removeAll = useCart((state)=>state.removeAll)
+  
 
-  const totalPrice = items.reduce((totalPrice: number, item: { price: any }) => {
+  
+
+  /* const totalPrice = items.reduce((totalPrice: number, item: { price: any }) => {
     return totalPrice + Number(item.price)
-  },0) 
+  },0)  */
 
   useEffect(()=>{
     setSuccess(false)
@@ -49,10 +54,10 @@ function Summary() {
 
 
   const config:PaystackProps= {
-    label:user.name as string,
+    label:user?.name as string,
     email: user?.email as string,
-    publicKey : "pk_live_7f43187dfa92b20ee02ea32681ae091034c00be8", //process.env.API_PUBLIC_KEY as string,
-    amount :totalPrice * 100,
+    publicKey : process.env.NEXT_PUBLIC_KEY as string, //process.env.API_PUBLIC_KEY as string,
+    amount :totalAmount * 100,
     currency: "NGN",
   
   }
@@ -61,11 +66,11 @@ function Summary() {
 
   const onSuccess = (reference:referenceObj) => {
 
-    const res = axios.post(`/api/verify/${reference.reference}`,{productsIds: items.map((item) =>item.id)})
+    const res = axios.post(`/api/verify/${reference.reference}`,{productsIds: cartItems.map((item) =>item.id)})
        .then(response =>{
-        if (response.data.data.status === 'success') {
+        if (response.statusText === 'OK') {
           setSuccess(true)
-          removeAll()
+          dispatch(removeAll())
           return toast.success('payment successful')
         } 
         return toast.error('An error occurred')
@@ -84,7 +89,7 @@ function Summary() {
 
   const componentProps = {
     ...config,
-    text: `Checkout`,
+    text: `${cartItems.length ? "checkout" :"No products in your cart" }`,
     onSuccess,
     onClose
   }
@@ -102,7 +107,7 @@ function Summary() {
             <div className='text-base font-medium text-gry-900'>
               Order items
             </div>
-            <Currency data={totalPrice}/> 
+            <Currency data={totalAmount}/> 
           </div>
         </div>
         <Button className="w-full mt-6">

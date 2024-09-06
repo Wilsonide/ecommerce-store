@@ -9,7 +9,7 @@ interface Query{
     searchTerm?: string
 }
 
-const URL = `${process.env.NEXT_PUBLIC_API_URL}/products`
+const URL = `${process.env.NEXT_PUBLIC_URL}/products`
 const getProducts = async (query:Query): Promise<Product[]> => {
     const Url = qs.stringifyUrl({
         url:URL,
