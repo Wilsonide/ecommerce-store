@@ -39,7 +39,7 @@ const form = useForm<z.infer<typeof registerSchema >>({
 })
   return (
 <div className="mt-8">
-    <CardWrapper headerLabel='Create an account' backButtonLabel="Already have an account?" backButtonHref='/auth/login' showSocial >
+    <CardWrapper headerLabel='Create an account' backButtonLabel="Already have an account?" backButtonHref='/auth/login' backButtonLink='Login' showSocial headerTitle='Register here'>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className='space-y-4'>
