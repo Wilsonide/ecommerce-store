@@ -11,6 +11,8 @@ import './globals.css'
 
 
 import { cn } from '@/lib/utils'
+import StoreProvider from '@/components/storeProvider'
+import Navbar from '@/components/navbar'
 
 
 const font = Urbanist({ subsets: ['latin'] })
@@ -33,11 +35,14 @@ export default async function RootLayout({
     <html lang="en">
       <AuthProvider>
           <body className={cn('flex flex-col',font.className)} >
-            <ModalProvider/>
-            <ToastProvider/>
-            
             <div className='flex flex-col flex-1'>
-              {children}
+              <StoreProvider>
+                <ModalProvider/>
+                <ToastProvider/>
+                {/* @ts-ignore */}
+                {<Navbar/> } 
+                {children}
+              </StoreProvider>
             </div>
             
             {<Footer data={categories}/>}

@@ -15,7 +15,7 @@ interface PageProps{
 
 const HomePage = async ({searchParams}:PageProps) => {
   
-  const billboard = await getBillboard('clzxyv1a80003jspxldswf2oj')
+  const billboard = await getBillboard('clztw9zzy000311hdp96o6mfq')
   
   const products = await getProducts({
     isFeatured: true

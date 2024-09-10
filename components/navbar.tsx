@@ -10,14 +10,6 @@ import { UserButton } from './auth/userButton'
 import Search from './Search'
 
 import { Redressed } from 'next/font/google'
-const Routes = [
-  '/',
-  '/product',
-  '/category',
-];
-
-
-
 
 
 export const revalidate = 0

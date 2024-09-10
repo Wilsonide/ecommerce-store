@@ -25,8 +25,9 @@ function Info({data, orders}: InfoProps) {
 const [mounted,setMounted] = useState(false)
 const [count, setCount] = useState(data.cartQuantity)
 
-const dispatch = useDispatch()
+
 const cartItems = useSelector<RootState,cartProduct[]>((state)=> state.cart.cartItems)
+const dispatch = useDispatch()
 
 const product = data
 const cartItem = cartItems.find(item => item.id === product.id)
