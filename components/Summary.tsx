@@ -46,6 +46,8 @@ function Summary() {
   /* const totalPrice = items.reduce((totalPrice: number, item: { price: any }) => {
     return totalPrice + Number(item.price)
   },0)  */
+  console.log("PUBLIC",process.env.NEXT_PUBLIC_P_KEY)
+  console.log("sECRET",process.env.NEXT_PUBLIC_SECRET_KEY)
 
   useEffect(()=>{
     setSuccess(false)
@@ -56,7 +58,7 @@ function Summary() {
   const config:PaystackProps= {
     label:user?.name as string,
     email: user?.email as string,
-    publicKey : process.env.NEXT_PUBLIK_KEY as string, //process.env.API_PUBLIC_KEY as string,
+    publicKey : process.env.NEXT_PUBLIC_P_KEY as string, //process.env.API_PUBLIC_KEY as string,
     amount :totalAmount * 100,
     currency: "NGN",
   
