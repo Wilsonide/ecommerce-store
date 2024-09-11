@@ -19,7 +19,7 @@ export async function POST(req: Request, { params }: { params: { reference: stri
 
     try {
         console.log("================================")
-        console.log(process.env.SECRET_KEY)
+        console.log(process.env.API_SECRET_KEY)
         console.log("================================")
         const user = await currentUser();
         const email = user?.email as string;
@@ -28,7 +28,7 @@ export async function POST(req: Request, { params }: { params: { reference: stri
         const res = await fetch(`https://api.paystack.co/transaction/verify/${params.reference}`, {
             method: 'GET',
             headers: {
-                Authorization: process.env.SECRET_KEY as string
+                Authorization: process.env.API_SECRET_KEY as string
             }
         })
         const data = await res.json();
