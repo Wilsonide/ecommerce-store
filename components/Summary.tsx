@@ -46,9 +46,9 @@ function Summary() {
   /* const totalPrice = items.reduce((totalPrice: number, item: { price: any }) => {
     return totalPrice + Number(item.price)
   },0)  */
-  console.log("PUBLIC",process.env.NEXT_PUBLIC_P_KEY)
-  console.log("sECRET",process.env.NEXT_PUBLIC_SECRET_KEY)
-  console.log(process.env.NEXT_PUBLIC_API_URL)
+ 
+
+
 
   useEffect(()=>{
     setSuccess(false)
