@@ -20,8 +20,8 @@ import Reviews from '@/components/Reviews'
 const font = Urbanist({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'store',
-  description: 'store',
+  title: 'Ichekuwoods store',
+  description: 'An Upholstery store',
 }
 export const revalidate = 0
 
