@@ -33,8 +33,15 @@ function ProductList({ title, data }: ProductListProps) {
       {/* Pagination Controls */}
       {totalPages > 1 && (
         <div className="flex items-center justify-center gap-2 mt-6">
+          {/* Prev Button */}
           <button
-            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            onClick={() => {
+              setCurrentPage(prev => {
+                const newPage = Math.max(prev - 1, 1);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                return newPage;
+              });
+            }}
             disabled={currentPage === 1}
             className="px-4 py-2 rounded-lg border bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
           >
@@ -45,19 +52,29 @@ function ProductList({ title, data }: ProductListProps) {
           {Array.from({ length: totalPages }, (_, i) => (
             <button
               key={i}
-              onClick={() => setCurrentPage(i + 1)}
+              onClick={() => {
+                setCurrentPage(i + 1);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
               className={`px-4 py-2 rounded-lg border ${
                 currentPage === i + 1
-                  ? 'bg-yellow-600 text-white border-yellow-600'
-                  : 'bg-gray-100 hover:bg-gray-200'
+                  ? "bg-yellow-600 text-white border-yellow-600"
+                  : "bg-gray-100 hover:bg-gray-200"
               }`}
             >
               {i + 1}
             </button>
           ))}
 
+          {/* Next Button */}
           <button
-            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            onClick={() => {
+              setCurrentPage(prev => {
+                const newPage = Math.min(prev + 1, totalPages);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                return newPage;
+              });
+            }}
             disabled={currentPage === totalPages}
             className="px-4 py-2 rounded-lg border bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
           >
@@ -65,6 +82,7 @@ function ProductList({ title, data }: ProductListProps) {
           </button>
         </div>
       )}
+
     </div>
   )
 }

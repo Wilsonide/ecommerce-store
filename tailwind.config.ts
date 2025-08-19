@@ -16,6 +16,10 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        'sm': '722px', // modified 'sm' breakpoint
+        
+      },
       colors: {
         black: 'rgb(30 30 30)',
         blacklight: 'rgb(70 70 70)',
