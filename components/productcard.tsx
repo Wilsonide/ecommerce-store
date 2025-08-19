@@ -82,7 +82,6 @@ function ProductCard({data}:ComponentProp) {
         </div>
         <div>
             <p className='font-semibold text-lg'>{data.name}</p>
-            <p className='text-sm text-gray-500'>{data.category.name}</p>
         </div>
 
         <div>
