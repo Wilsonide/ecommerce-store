@@ -6,8 +6,13 @@
 export const publicRoutes = [
     '/auth/new-verification',
     '/product',
-    '/category',
-    '/testing'
+    '/contact',
+    '/about',
+    '/policy',
+    '/terms',
+    '/cart',
+    '/faqs',
+    '/api/contact',
 ];
 
 export const Root =  '/';
@@ -23,6 +28,7 @@ export const authRoutes = [
     '/auth/error',
     '/auth/reset',
     '/auth/new-password',
+
 ];
 
 /**

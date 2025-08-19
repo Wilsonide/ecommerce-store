@@ -29,7 +29,6 @@ interface AddRatingProps{
 const AddRating : React.FC<AddRatingProps> = ({ product,orders}) => {
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
-
     const user = useCurrentUser()
 
     const RatingSchema = z.object({
@@ -39,6 +38,9 @@ const AddRating : React.FC<AddRatingProps> = ({ product,orders}) => {
     })
 
     const onSubmit = async(values:z.infer<typeof RatingSchema>) => {
+        if (!user) {
+            return toast.error("please logged in to add rating")
+        }
             setIsLoading(true);
        
             if(values.rating === 0) {

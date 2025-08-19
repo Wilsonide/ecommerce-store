@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 
 import getCategories from '@/server-actions/getCategories'
 
@@ -22,23 +23,26 @@ async function Navbar() {
   
   return (
     <div id='navbar' className='lg:border-b-2 border-b-2 border-white bg-black  fixed w-full top-0 z-20 '>
-        <Container>
-              <div className='h-16 flex items-center justify-between relative px-4 sm:px-6 lg:px-4 gap-4 text-center'>
+        <div className='h-16 flex items-center justify-center relative px-6 sm:px-6 lg:px-4 gap-4 text-center'>
                 <MobileMenu data={categories}/>
-                <img className='object-cover h-[3rem]'  src = "/images/myProfile.png" alt ="Logo" 
-                    />
+                <div className='flex items-center'>
+                  <img className=' h-14 object-contain sm:object-cover block'  src = "/images/myLogo.png" alt ="Logo" />
+                  <div className="flex items-center justify-center">
+                    <h6 className="text-sm leading-none text-yellow-300 drop-shadow-[0_0_20px_rgba(251,146,60,0.9)]">
+                      ICHEKU WOOD AND SONS<br />
+                    </h6>
+                  </div>
+                </div>
+      
 
                 <div className='hidden lg:block'>
                   <Search/>
                 </div>
                 
-                <MainNav data={categories}/>
+                <MainNav/>
                 <NavbarActions/>
-                <div id='user-button' className='ml-auto flex items-center space-x-4'> 
-                  <UserButton/>
-                </div>
-              </div>     
-        </Container>
+        </div>     
+    
         
     </div>
   )

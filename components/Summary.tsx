@@ -15,6 +15,7 @@ import { sendConfirmOrderEmail } from '@/lib/mail'
 import { RootState } from '@/app/features/store'
 import {removeAll} from '@/app/features/cart/cartSlice'
 import { cartProduct } from '@/types'
+import Link from 'next/link'
 
 
 
@@ -100,7 +101,14 @@ function Summary() {
 
   
 
-
+  if (!user) {
+    return (
+      <div className='mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'>
+        <h2 className='text-lg font-medium text-black'>Order Summary</h2>
+        <p className='mt-2 text-sm text-gray-600'>Please <Link href='/login' className='underline text-blue-400'>log in</Link> to proceed with checkout.</p>
+      </div>
+    )
+  }
 
   return (
     <div className='mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8'>

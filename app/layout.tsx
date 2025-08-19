@@ -13,6 +13,8 @@ import './globals.css'
 import { cn } from '@/lib/utils'
 import StoreProvider from '@/components/storeProvider'
 import Navbar from '@/components/navbar'
+import Reviews from '@/components/Reviews'
+
 
 
 const font = Urbanist({ subsets: ['latin'] })
@@ -44,7 +46,7 @@ export default async function RootLayout({
                 {children}
               </StoreProvider>
             </div>
-            
+            <Reviews/>
             {<Footer data={categories}/>}
           </body>
       </AuthProvider>

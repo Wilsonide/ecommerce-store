@@ -26,7 +26,7 @@ const [mounted,setMounted] = useState(false)
 const [count, setCount] = useState(data.cartQuantity)
 
 
-const cartItems = useSelector<RootState,cartProduct[]>((state)=> state.cart.cartItems)
+const cartItems = useSelector((state: RootState) => state.cart?.cartItems || [])
 const dispatch = useDispatch()
 
 const product = data

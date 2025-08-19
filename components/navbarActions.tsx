@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import {useSelector} from "react-redux"
 import { RootState } from '@/app/features/store'
 import { cartProduct } from '@/types'
+import { UserButton } from './auth/userButton'
 
 
 function NavbarActions() {
@@ -32,6 +33,9 @@ if(!mounted) {
             />
             <span className='ml-2 font-medium text-sm text-black'>{cartItems.length}</span>
         </Button>
+        
+        <UserButton/>
+                
     </div>
   )
 }
