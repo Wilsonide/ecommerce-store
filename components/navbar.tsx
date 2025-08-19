@@ -11,6 +11,7 @@ import { UserButton } from './auth/userButton'
 import Search from './Search'
 
 import { Redressed } from 'next/font/google'
+import Link from 'next/link'
 
 
 export const revalidate = 0
@@ -28,9 +29,9 @@ async function Navbar() {
                 <div className='flex items-center'>
                   <img className=' h-14 object-contain sm:object-cover block'  src = "/images/myLogo.png" alt ="Logo" />
                   <div className="flex items-center justify-center">
-                    <h6 className="text-sm leading-none text-yellow-300 drop-shadow-[0_0_20px_rgba(251,146,60,0.9)]">
+                    <Link href='/' className="text-sm leading-none text-yellow-300 drop-shadow-[0_0_20px_rgba(251,146,60,0.9)]">
                       ICHEKU WOOD AND SONS<br />
-                    </h6>
+                    </Link>
                   </div>
                 </div>
       
