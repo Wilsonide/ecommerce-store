@@ -1,5 +1,6 @@
 'use client'
 import { Product } from '@/types'
+ import { useEffect } from "react";
 import React, { useState } from 'react'
 import ProductCard from './productcard'
 import NoResults from './ui/noResults'
@@ -11,6 +12,12 @@ interface ProductListProps {
 
 function ProductList({ title, data }: ProductListProps) {
   const [currentPage, setCurrentPage] = useState(1)
+ 
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   const itemsPerPage = 8 // 👈 how many products per page
 
   // Pagination logic
@@ -37,9 +44,7 @@ function ProductList({ title, data }: ProductListProps) {
           <button
             onClick={() => {
               setCurrentPage(prev => {
-                const newPage = Math.max(prev - 1, 1);
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                return newPage;
+                return Math.max(prev - 1, 1);
               });
             }}
             disabled={currentPage === 1}
@@ -54,7 +59,6 @@ function ProductList({ title, data }: ProductListProps) {
               key={i}
               onClick={() => {
                 setCurrentPage(i + 1);
-                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               className={`px-4 py-2 rounded-lg border ${
                 currentPage === i + 1
@@ -69,10 +73,8 @@ function ProductList({ title, data }: ProductListProps) {
           {/* Next Button */}
           <button
             onClick={() => {
-              setCurrentPage(prev => {
-                const newPage = Math.min(prev + 1, totalPages);
-                window.scrollTo({ top: 0, behavior: "smooth" });
-                return newPage;
+              setCurrentPage(prev => { 
+                return Math.min(prev + 1, totalPages);;
               });
             }}
             disabled={currentPage === totalPages}
