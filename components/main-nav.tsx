@@ -44,7 +44,7 @@ function MainNav() {
 
   return (
     <nav className=' sm:mx-6 sm:flex sm:litems-center sm:w-full sm:justify-center sm:space-x-6 hidden '>
-         <Link href='/' className={cn(`md:hidden sm:text-nowrap text-sm font-medium transition-colors capitalize hover:border-b-2 border-yellow-300 pb-2 ${poppins.className}`, pathname === '/' ? "text-yellow-300" : "text-white")}>
+         <Link href='/' className={cn(`sm:text-nowrap text-sm font-medium transition-colors capitalize hover:border-b-2 border-yellow-300 pb-2 ${poppins.className}`, pathname === '/' ? "text-yellow-300" : "text-white")}>
                 Home
         </Link>
         {Data.map((route) =>(
