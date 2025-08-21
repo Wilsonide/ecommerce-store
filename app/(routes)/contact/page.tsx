@@ -57,7 +57,7 @@ export default function ContactPage() {
 
   // Replace with your WhatsApp number (include country code, no + or spaces)
   const whatsappNumber = "2349031249273"
-  const whatsappMessage = `Hello, my name is ${user?.name}. i want to make enquiry about your products.`
+  const whatsappMessage = `Hello,${user ? ` my name is ${user.name}` : ""}. I want to make enquiry about your products.`
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
 
   return (
